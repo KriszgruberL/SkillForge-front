@@ -1,0 +1,40 @@
+<nav class="w-full bg-primary flex justify-content-between align-items-center">
+  <div class="flex flex-row ">
+    <div class="flex flex-row align-items-center mr-2">
+      <img alt="SkillForge" class="flex w-10rem" src="/assets/img/logo.png">
+      <p class="font-italic text-sm">Igniting Success</p>
+    </div>
+    <!---------------------------------------------------------------------->
+    <div class="flex-1"></div>
+    <!---------------------------------------------------------------------->
+    <div class="flex flex-row justify-content-center">
+      <ul class="ml-2 flex flex-row mt-1">
+        <li *ngFor="let link of links" class="font-bold p-2 flex align-items-center justify-content-center">
+          <a routerLink="{{ link.url }}">{{ link.name }} </a>
+        </li>
+      </ul>
+    </div>
+    <!---------------------------------------------------------------------->
+    <div class="flex-1"></div>
+  </div>
+  <!---------------------------------------------------------------------->
+  <div class="flex flex-row">
+    <div class="card flex justify-content-center">
+      <p-toast></p-toast>
+      <p-menu #menu [model]="userLink" [popup]="true"></p-menu>
+      <button (click)="menu.toggle($event)" class="btn mr-2">
+        <i class="pi pi-user p-1" style="font-size: 1.5rem; color : #FCFDFD "></i>
+      </button>
+    </div>
+    <ng-container *ngFor="let visitor of visitorLink">
+    <button  class="btn mr-2">
+      <span class="white p-1 material-symbols-outlined" title="{{ visitor.name }}" (click)="visitor.goto ">{{ visitor.icon }}</span>
+    </button>
+<!--    <button  class="btn mr-2">-->
+<!--      <span class="white p-1 material-symbols-outlined" title="S'enregistrer" (click)="showRegister()"> {{ visitor.icon }} </span>-->
+<!--    </button>-->
+    </ng-container>
+  </div>
+</nav>
+
+

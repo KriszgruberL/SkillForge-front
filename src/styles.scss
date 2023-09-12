@@ -3,6 +3,90 @@
 @import "primeng/resources/primeng.css";
 @import "style/theme.css";
 
+$teal: #60E5E0;
+$dark-teal: #006D77;
+$medium-teal: #6dd4dc;
+$azure: #E0F0F5;
+$white: #FCFDFD;
+
 body {
   font-family: var(--font-family);
 }
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color);
+  padding-bottom: 0.25rem;
+  position: relative; /* Add relative positioning */
+
+  &:after {
+    content: ""; /* This is necessary for the pseudo element to work. */
+    position: absolute; /* Position the pseudo-element absolutely */
+    left: 0;
+    bottom: 0;
+    width: 0; /* Change this to whatever width you want to have before hover. *//* This creates some space between the element and the border. */
+    border-bottom: 2px solid $teal; /* This creates the border. Replace black with whatever color you want. */
+    transform: scaleX(0); /* Initially scale the underline to 0 width */
+    transform-origin: 50% 50%; /* Start scaling from the left side */
+    transition: transform 0.2s ease; /* Add a transition for the scaling */
+  }
+
+  &:hover:after {
+    width: 100%; /* This will be the new width of your border when on hover */
+    transform: scaleX(1); /* Scale the underline to full width on hover or active state */
+  }
+
+  &:active {
+    color: $azure;
+
+    &:after {
+      border: none;
+    }
+  }
+}
+.white {
+  color : $white;
+}
+
+ul {
+  list-style: none;
+  padding: 0.5rem;
+
+  li {
+    padding: 0.25rem;
+  }
+}
+
+img {
+  padding: 1rem;
+}
+
+.btn {
+  padding: 0.2rem;
+  border-radius: 0.5rem 0.5rem 0 0.5rem;
+  background: transparent;
+  border: 1px solid $teal;
+  transition: all 0.2s ease-in-out;
+
+  &:active, &:focus {
+    border: 1px solid $teal;
+    box-shadow: inset -2px -2px 4px 0px rgba(0, 0, 0, 0.5);
+  }
+
+  &:hover {
+    background: $dark-teal;
+  }
+
+}
+
+
+
+
+
+
+
