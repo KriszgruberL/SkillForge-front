@@ -1,1 +1,9 @@
-<p>register works!</p>
+<div class="card w-12 flex justify-content-center">
+  <form class="m-1 w-12 flex flex-column" [formGroup]="form" (submit)="onSubmit()">
+    <formly-form class="flex justify-content-center w-12" [model]="model" [fields]="fields" [form]="form"></formly-form>
+    <div class="flex flex-row justify-content-evenly mt-3">
+      <button class="btn-dark" type="reset"> Effacer </button>
+      <button class="btn-medium" type="submit">S'enregistrer</button>
+    </div>
+  </form>
+</div>

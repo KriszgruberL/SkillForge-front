@@ -18,6 +18,16 @@ body {
   margin: 0;
 }
 
+.container {
+  width : 90vw;
+  margin : 1.5rem auto;
+}
+
+button {
+  user-select : none;
+  cursor : pointer;
+}
+
 a {
   text-decoration: none;
   color: var(--color);
@@ -49,16 +59,19 @@ a {
     }
   }
 }
+
 .white {
-  color : $white;
+  color: $white;
 }
 
 ul {
   list-style: none;
   padding: 0.5rem;
+  user-select: none;
 
   li {
     padding: 0.25rem;
+    cursor: pointer;
   }
 }
 
@@ -67,22 +80,53 @@ img {
 }
 
 .btn {
-  padding: 0.2rem;
   border-radius: 0.5rem 0.5rem 0 0.5rem;
-  background: transparent;
-  border: 1px solid $teal;
   transition: all 0.2s ease-in-out;
+  padding: 0.5rem 0.75rem;
+  font-size: large;
 
-  &:active, &:focus {
-    border: 1px solid $teal;
+  &:active {
     box-shadow: inset -2px -2px 4px 0px rgba(0, 0, 0, 0.5);
   }
 
-  &:hover {
-    background: $dark-teal;
+  &-nav {
+    @extend .btn;
+    padding: 0.2rem;
+    background: transparent;
+    border: 1px solid $teal;
+
+    &:hover {
+      background: $dark-teal;
+    }
   }
 
+  &-medium {
+    @extend .btn;
+    background: $teal;
+    border: 1px solid $dark-teal;
+
+    &:hover {
+      background: $dark-teal;
+      color : $white;
+    }
+  }
+
+  &-dark{
+    @extend .btn;
+    background: $dark-teal;
+    border: 1px solid $teal;
+    color : $white;
+
+    &:hover {
+      background: $teal;
+      color : black;
+    }
+  }
 }
+
+
+
+
 
 
 

@@ -22,17 +22,15 @@
     <div class="card flex justify-content-center">
       <p-toast></p-toast>
       <p-menu #menu [model]="userLink" [popup]="true"></p-menu>
-      <button (click)="menu.toggle($event)" class="btn mr-2">
+      <button (click)="menu.toggle($event)" class="btn-nav mr-2">
         <i class="pi pi-user p-1" style="font-size: 1.5rem; color : #FCFDFD "></i>
       </button>
     </div>
     <ng-container *ngFor="let visitor of visitorLink">
-    <button  class="btn mr-2">
-      <span class="white p-1 material-symbols-outlined" title="{{ visitor.name }}" (click)="visitor.goto ">{{ visitor.icon }}</span>
+    <button  class="btn-nav mr-2">
+      <span class="white p-1 material-symbols-outlined" title="{{ visitor.name }}" (click)= "visitor.goto ? visitor.goto() : ''" >{{ visitor.icon }}</span>
     </button>
-<!--    <button  class="btn mr-2">-->
-<!--      <span class="white p-1 material-symbols-outlined" title="S'enregistrer" (click)="showRegister()"> {{ visitor.icon }} </span>-->
-<!--    </button>-->
+
     </ng-container>
   </div>
 </nav>

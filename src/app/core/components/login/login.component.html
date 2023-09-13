@@ -1,1 +1,16 @@
-<p>login works!</p>
+<div class="card w-12 flex justify-content-center">
+    <form class="m-1 w-12 flex flex-column" [formGroup]="form" (ngSubmit)="onSubmit()">
+        <formly-form class="flex justify-content-center w-12" [model]="model" [fields]="fields"
+                     [form]="form"></formly-form>
+        <p-message *ngIf="errorMessage" severity="error" text="{{errorMessage}}"></p-message>
+        <div class="flex flex-row justify-content-evenly mt-3">
+            <button class="btn-dark">Fermer</button>
+            <button class="btn-medium" type="submit">Se connecter</button>
+        </div>
+    </form>
+</div>
+
+<!--The <formly-form> component is the main container of the form, which will build and render form fields, it accept the following inputs:-->
+<!--  fields: The field configurations for building the form.-->
+<!--  form: The form instance which allow to track model value and validation status.-->
+<!--  model: The model to be represented by the form.-->

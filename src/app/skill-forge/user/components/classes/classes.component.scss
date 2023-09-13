@@ -1,0 +1,27 @@
+$teal: #60E5E0;
+$dark-teal: #006D77;
+$medium-teal: #6dd4dc;
+$azure: #E0F0F5;
+$white: #FCFDFD;
+
+div {
+  border: 1px dashed #888;
+  border-radius : 0.5rem;
+}
+
+.layout {
+  display: grid;
+  grid:
+    "courses task" 1fr
+    "card task" 1fr
+    "card next" 1fr
+    "card next" 1fr
+    / 4fr 1fr;
+  gap: 1rem;
+}
+
+.courses { grid-area: courses; }
+.task { grid-area: task; }
+.card { grid-area: card; }
+.next { grid-area: next; }
+

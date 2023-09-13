@@ -4,6 +4,9 @@ import {MenuItem, MenuItemCommandEvent, MessageService} from "primeng/api";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {RegisterComponent} from "../register/register.component";
 import {LoginComponent} from "../login/login.component";
+import {Form} from "@angular/forms";
+import {UserDTO} from "../../../shared/model/User";
+import {AuthService} from "../../../shared/services/auth.service";
 
 @Component({
   selector: 'app-header',
@@ -17,21 +20,25 @@ export class HeaderComponent implements OnInit, OnDestroy {
   userLink!: MenuItem[] | undefined;
   visitorLink!: Link[];
 
+  user! : UserDTO;
+
   constructor(public dialogService: DialogService,
-              private messageService: MessageService) {
+              private messageService: MessageService,
+              private _authService : AuthService) {
   }
 
   ngOnInit(): void {
 
     this.links = [
-      {name: "Accueil", url: "*"},
+      {name: "Accueil", url: "/home"},
       {name: "Agenda", url: "*"},
-      {name: "Cours", url: "*"},
+      {name: "Cours", url: "/courses"},
     ]
 
     this.visitorLink = [
       {name: "S'enregistrer", url: "*", icon : "person_check", goto : () => this.showRegister()},
       {name: "Se connecter", url: "*", icon : "login", goto : () => this.showLogin()},
+      {name: "Se déconnecter", url: "*", icon : "logout", goto : () => this._authService.logout()},
     ]
 
     this.userLink = [
@@ -50,8 +57,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
         }
       }
     ];
-
-
   }
 
   ngOnDestroy(): void {
@@ -67,22 +72,30 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   showRegister() {
-    this.ref = this.dialogService.open(RegisterComponent, { header: 'S\'enregistrer'});
-    // this.ref.onClose.subscribe((product: Product) => {
-    //   if (product) {
-    //     this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
-    //   }
-    // });
+    this.ref = this.dialogService.open(RegisterComponent, {
+      header: 'S\'enregistrer',
+      width : '30%',
+      closeOnEscape : true,
+    });
+    this.ref.onClose.subscribe((user : UserDTO) => {
+      if (user) {
+        this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: user.username })
+        // this._authService.login()
+      }
+    });
   }
 
   showLogin() {
-    this.ref = this.dialogService.open(LoginComponent, { header: 'Se connecter'});
-    // this.ref.onClose.subscribe((product: Product) => {
-    //   if (product) {
-    //     this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: product.name });
-    //   }
-    // });
+    this.ref = this.dialogService.open(LoginComponent, {
+      header: 'Se connecter',
+      width : '30%',
+      closeOnEscape : true,
+    });
+    this.ref.onClose.subscribe(() => {
+    // todo
+    });
   }
+
 
   logout(): void {
     console.log("logout pouet")

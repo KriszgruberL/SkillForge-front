@@ -4,26 +4,28 @@ import {NgModule} from "@angular/core";
 import {SharedModule} from "../shared/shared.module";
 import {MenuModule} from "primeng/menu";
 import {ToastModule} from "primeng/toast";
-import {ContextMenuModule} from "primeng/contextmenu";
-import {ButtonModule} from "primeng/button";
-import {DropdownModule} from "primeng/dropdown";
-import { RegisterComponent } from './components/register/register.component';
-import { LoginComponent } from './components/login/login.component';
+import {RegisterComponent} from './components/register/register.component';
+import {LoginComponent} from './components/login/login.component';
+import {ReactiveFormsModule} from "@angular/forms";
+import {PrimengModule} from "../shared/primeng.module";
+import { HomeComponent } from './components/home/home.component';
+import {MessageModule} from "primeng/message";
 
 @NgModule({
   declarations: [
     HeaderComponent,
     RegisterComponent,
     LoginComponent,
+    HomeComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
+    PrimengModule,
+    ReactiveFormsModule,
     MenuModule,
     ToastModule,
-    ContextMenuModule,
-    ButtonModule,
-    DropdownModule,
+    MessageModule,
   ],
   exports: [
     HeaderComponent,
