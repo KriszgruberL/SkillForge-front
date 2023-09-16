@@ -21,11 +21,6 @@ import {MessageModule} from "primeng/message";
   imports: [
     CommonModule,
     SharedModule,
-    PrimengModule,
-    ReactiveFormsModule,
-    MenuModule,
-    ToastModule,
-    MessageModule,
   ],
   exports: [
     HeaderComponent,

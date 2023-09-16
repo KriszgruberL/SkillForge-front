@@ -23,7 +23,9 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 
   ], exports : [
     FormlyModule,
-    PrimengModule
+    PrimengModule,
+    ReactiveFormsModule,
+    FormlyModule,
   ],
   providers: [
     HttpClient
