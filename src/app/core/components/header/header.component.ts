@@ -7,6 +7,7 @@ import {LoginComponent} from "../login/login.component";
 import {Form} from "@angular/forms";
 import {UserDTO} from "../../../shared/model/User";
 import {AuthService} from "../../../shared/services/auth.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-header',
@@ -21,24 +22,29 @@ export class HeaderComponent implements OnInit, OnDestroy {
   visitorLink!: Link[];
 
   user! : UserDTO;
+  isLogged: boolean = false;
+  private subscription$$: Subscription;
 
   constructor(public dialogService: DialogService,
               private messageService: MessageService,
               private _authService : AuthService) {
+    this.subscription$$ = this._authService.connectedUser$.subscribe((user) => {
+      this.isLogged = user !== undefined;
+      console.log(("logged : " + this.isLogged))
+    });
   }
 
   ngOnInit(): void {
 
     this.links = [
       {name: "Accueil", url: "/home"},
-      {name: "Agenda", url: "*"},
+      {name: "Agenda", url: "/agenda"},
       {name: "Cours", url: "/courses"},
     ]
 
     this.visitorLink = [
-      {name: "S'enregistrer", url: "*", icon : "person_check", goto : () => this.showRegister()},
-      {name: "Se connecter", url: "*", icon : "login", goto : () => this.showLogin()},
-      {name: "Se déconnecter", url: "*", icon : "logout", goto : () => this._authService.logout()},
+      {name: "S'enregistrer", url: "*", icon : "person_check", goto : () => this.showRegister(), visible : !this.isLogged},
+      {name: "Se connecter", url: "*", icon : "login", goto : () => this.showLogin(), visible : !this.isLogged},
     ]
 
     this.userLink = [
@@ -60,6 +66,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.subscription$$.unsubscribe();
   }
 
 
@@ -77,12 +84,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
       width : '30%',
       closeOnEscape : true,
     });
-    this.ref.onClose.subscribe((user : UserDTO) => {
-      if (user) {
-        this.messageService.add({ severity: 'info', summary: 'Product Selected', detail: user.username })
-        // this._authService.login()
-      }
-    });
   }
 
   showLogin() {
@@ -91,14 +92,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
       width : '30%',
       closeOnEscape : true,
     });
-    this.ref.onClose.subscribe(() => {
-    // todo
-    });
   }
 
 
   logout(): void {
-    console.log("logout pouet")
+    this._authService.logout();
   }
 
 

@@ -10,6 +10,7 @@ import {ButtonModule} from "primeng/button";
 import {DropdownModule} from "primeng/dropdown";
 import {CardModule} from "primeng/card";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {MessageModule} from "primeng/message";
 
 
 
@@ -24,6 +25,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
     DropdownModule,
     CardModule,
     BrowserAnimationsModule,
+    MessageModule,
   ],
   providers: [
     MessageService,

@@ -1,6 +1,11 @@
 import { Component } from '@angular/core';
 import {FormGroup} from "@angular/forms";
 import {FormlyFieldConfig} from "@ngx-formly/core";
+import {AuthDTO} from "../../../shared/model/User";
+import {AuthService} from "../../../shared/services/auth.service";
+import {MessageService} from "primeng/api";
+import {Router} from "@angular/router";
+import {DynamicDialogRef} from "primeng/dynamicdialog";
 
 @Component({
   selector: 'app-register',
@@ -8,6 +13,14 @@ import {FormlyFieldConfig} from "@ngx-formly/core";
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+
+  errorMessage : string = "";
+  constructor(private _authService: AuthService,
+              private _router: Router,
+              private _dialogRef: DynamicDialogRef,
+              private _msgService: MessageService) {
+  }
+
   form = new FormGroup({});
   model = {
     username : '',
@@ -54,8 +67,22 @@ export class RegisterComponent {
     },
   ]
 
-
   onSubmit() {
-    console.log(this.form.value);
+    this._authService.register(this.model).subscribe(
+      {
+        next : (response : AuthDTO) => {
+          this._dialogRef.close()
+          this._router.navigateByUrl('/home')
+          new Promise(() => this._msgService.add({
+            severity: 'success',
+            detail: 'Enregistrement réussi'
+          })).then(() => setTimeout(() => this._msgService.clear(), 5))
+        }, error :(err) => {
+          this.form.markAllAsTouched()
+          this.errorMessage = 'Échec de l\'enregistrement. Vérifiez vos informations.'
+          //todo don't be fucking lazy do proper validation
+        }
+      }
+    )
   }
 }

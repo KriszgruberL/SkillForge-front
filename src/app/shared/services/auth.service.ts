@@ -2,9 +2,9 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {AuthDTO} from "../model/User";
-import {BehaviorSubject, tap} from "rxjs";
+import {BehaviorSubject, Observable, tap} from "rxjs";
 import {Form, FormGroup} from "@angular/forms";
-import {LoginModel} from "../model/Auth";
+import {LoginModel, RegisterModel} from "../model/Auth";
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +13,7 @@ export class AuthService {
 
   private _urlAPI = 'http://localhost:8080/auth'
   private _$auth: BehaviorSubject<AuthDTO | undefined>
+  private _$isLogged: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor( private _http : HttpClient,
                private _router : Router) {
@@ -46,6 +47,20 @@ export class AuthService {
       localStorage.removeItem('role')
     }
     this._$auth.next(this.connectedUser)
+  }
+
+  get $isLogged(): Observable<boolean> {
+    return this._$isLogged.asObservable();
+  }
+
+  set $isLogged(value: boolean) {
+    this._$isLogged.next(value);
+  }
+
+  register(form : RegisterModel){
+    return this._http.post<AuthDTO>(`${this._urlAPI}/register`, form ).pipe(
+      tap((response : AuthDTO) => this.connectedUser = response),
+    )
   }
 
   logout(): void {
