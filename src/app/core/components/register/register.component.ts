@@ -6,6 +6,8 @@ import {AuthService} from "../../../shared/services/auth.service";
 import {MessageService} from "primeng/api";
 import {Router} from "@angular/router";
 import {DynamicDialogRef} from "primeng/dynamicdialog";
+import {LoginComponent} from "../login/login.component";
+import {HeaderComponent} from "../header/header.component";
 
 @Component({
   selector: 'app-register',
@@ -18,7 +20,8 @@ export class RegisterComponent {
   constructor(private _authService: AuthService,
               private _router: Router,
               private _dialogRef: DynamicDialogRef,
-              private _msgService: MessageService) {
+              private _msgService: MessageService,
+              private _headerComponent : HeaderComponent) {
   }
 
   form = new FormGroup({});
@@ -66,7 +69,10 @@ export class RegisterComponent {
       }
     },
   ]
-
+  showLogin(){
+    this._dialogRef.close();
+    this._headerComponent.showLogin();
+  }
   onSubmit() {
     this._authService.register(this.model).subscribe(
       {

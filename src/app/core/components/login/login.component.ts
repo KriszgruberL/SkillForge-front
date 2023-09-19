@@ -6,6 +6,7 @@ import {AuthDTO} from "../../../shared/model/User";
 import {Router} from "@angular/router";
 import {DynamicDialogRef} from "primeng/dynamicdialog";
 import {MessageService} from "primeng/api";
+import {HeaderComponent} from "../header/header.component";
 
 
 @Component({
@@ -20,7 +21,8 @@ export class LoginComponent {
   constructor(private _authService: AuthService,
               private _router: Router,
               private _dialogRef: DynamicDialogRef,
-              private _msgService: MessageService) {
+              private _msgService: MessageService,
+              private _headerComponent : HeaderComponent) {
   }
 
   form = new FormGroup({});
@@ -48,6 +50,11 @@ export class LoginComponent {
       }
     },
   ]
+
+  showRegister(){
+    this._dialogRef.close();
+    this._headerComponent.showRegister();
+  }
 
   onSubmit() {
     this._authService.login(this.model).subscribe({
