@@ -4,11 +4,8 @@ import {NgModule} from "@angular/core";
 import {SharedModule} from "../shared/shared.module";
 import {RegisterComponent} from './components/register/register.component';
 import {LoginComponent} from './components/login/login.component';
-import {ReactiveFormsModule} from "@angular/forms";
 import {HomeComponent} from './components/home/home.component';
-import {MessageModule} from "primeng/message";
-import {MenuModule} from "primeng/menu";
-import {ToastModule} from "primeng/toast";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -20,10 +17,7 @@ import {ToastModule} from "primeng/toast";
   imports: [
     CommonModule,
     SharedModule,
-    MessageModule,
     ReactiveFormsModule,
-    ToastModule,
-    MenuModule,
   ],
   exports: [
     HeaderComponent,

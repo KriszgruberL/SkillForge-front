@@ -1,18 +1,18 @@
 import {Component, OnInit} from '@angular/core';
+import {EventService} from "../../../services/event.service";
 import {CalendarOptions} from "@fullcalendar/core";
 import dayGridPlugin from '@fullcalendar/daygrid';
-import {EventService} from "../../../services/event.service";
 
 @Component({
   selector: 'app-agenda',
   templateUrl: './agenda.component.html',
   styleUrls: ['./agenda.component.scss']
 })
-export class AgendaComponent implements OnInit{
+export class AgendaComponent  implements OnInit{
 
   //todo https://fullcalendar.io/docs/angular
 
-  constructor(private eventService: EventService) { }
+  constructor(private _eventService: EventService) { }
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -24,18 +24,18 @@ export class AgendaComponent implements OnInit{
     //   this.events = events;
     //   this.options = {...this.options, ...{events: events}};
     // });
-  //   this.options = {
-  //     initialDate : new Date(),
-  //     headerToolbar: {
-  //       left: 'prev,next today',
-  //       center: 'title',
-  //       right: 'dayGridMonth,timeGridWeek,timeGridDay'
-  //     },
-  //     editable: true,
-  //     selectable:true,
-  //     selectMirror: true,
-  //     dayMaxEvents: true
-  //   };
+    //   this.options = {
+    //     initialDate : new Date(),
+    //     headerToolbar: {
+    //       left: 'prev,next today',
+    //       center: 'title',
+    //       right: 'dayGridMonth,timeGridWeek,timeGridDay'
+    //     },
+    //     editable: true,
+    //     selectable:true,
+    //     selectMirror: true,
+    //     dayMaxEvents: true
+    //   };
   }
 
 }

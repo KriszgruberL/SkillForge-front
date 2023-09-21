@@ -1,18 +1,15 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import {LoginComponent} from "./core/components/login/login.component";
-import {RegisterComponent} from "./core/components/register/register.component";
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 import {HomeComponent} from "./core/components/home/home.component";
-import {ClassesComponent} from "./skill-forge/user/components/classes/classes.component";
 import {WorkInProgressComponent} from "./shared/components/work-in-progress/work-in-progress.component";
 import {AgendaComponent} from "./skill-forge/user/components/agenda/agenda.component";
+import {ClassComponent} from "./skill-forge/user/components/class/class.component";
+
 
 const routes: Routes = [
-  { path : 'login', component : LoginComponent },
-  { path : 'register', component : RegisterComponent },
-  { path : 'courses', component : ClassesComponent },
-  { path : 'agenda', component : AgendaComponent },
   { path : 'home', component : HomeComponent },
+  { path : 'class', component : ClassComponent },
+  { path : 'agenda', component : AgendaComponent },
   { path : '*', component : WorkInProgressComponent },
   { path : '', component : HomeComponent },
 

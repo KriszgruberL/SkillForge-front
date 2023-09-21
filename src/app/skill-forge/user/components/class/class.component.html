@@ -1,0 +1,61 @@
+<div class="container">
+  <section class="layout">
+    <div class="courses flex ">
+      <div class="w-11 ">
+        <ng-container *ngFor="let link of coursesLink">
+          bulles
+        </ng-container>
+      </div>
+      <div class="flex-1">
+        <button class="btn-medium m-2 ">Ajouter</button>
+        <div class="w-12 flex flex-row">
+          <div class="flex cursor-pointer">
+                              <span class=" material-symbols-outlined" style="font-size : 3rem; color : darkcyan;"
+                                    title="Précédent">
+                                  arrow_back_ios_new
+                            </span>
+          </div>
+          <div class="w-6 cursor-pointer">
+                            <span class=" material-symbols-outlined" style="font-size : 3rem; color : darkcyan;"
+                                  title="Suivant">
+                                  arrow_forward_ios
+                            </span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="card" *ngFor="let clazz of institutions">
+      <ng-container *ngFor="let class of clazz.coursesGiven">
+        <p-carousel [value]="class" [numVisible]="4" [numScroll]="4" [circular]="true"
+                    [responsiveOptions]="responsiveOptions">
+
+          //TODO find a solution to this
+          <ng-co pTemplate="item">
+            <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
+              <div class="mb-3">
+                <img src="assets/img/" [alt]="class.name" class="w-6 shadow-2"/>
+              </div>
+              <div>
+                <h4 class="mb-1">{{ class.id }}</h4>
+                <h6 class="mt-0 mb-3">{{ class.teacher }}</h6>
+                <p-tag [value]="class.ueCode"></p-tag>
+                <div class="car-buttons mt-5">
+                  <span class="material-symbols-outlined" style="font-size : 2rem; color : darkcyan;">location_on</span>
+                  <span>{{ class.institutionID }}</span>
+                  <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
+                </div>
+              </div>
+            </div>
+          </ng-co>
+        </p-carousel>
+      </ng-container>
+
+    </div>
+    <div class="task">task</div>
+    <div class="next">class to do</div>
+  </section>
+</div>
+
+
+

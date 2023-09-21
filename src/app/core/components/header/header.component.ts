@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.links = [
       {name: "Accueil", url: "/home"},
       {name: "Agenda", url: "/agenda"},
-      {name: "Cours", url: "/courses"},
+      {name: "Cours", url: "/class"},
     ]
 
     this.visitorLink = [

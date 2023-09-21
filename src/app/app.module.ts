@@ -6,33 +6,34 @@ import {AppComponent} from './app.component';
 import {SharedModule} from "./shared/shared.module";
 import {CoreModule} from "./core/core.module";
 import {FormlyModule} from "@ngx-formly/core";
-import {ReactiveFormsModule} from "@angular/forms";
-import {FormlyPrimeNGModule} from "@ngx-formly/primeng";
 import {HttpClient} from "@angular/common/http";
-import { ClassesComponent } from './skill-forge/user/components/classes/classes.component';
-import { AgendaComponent } from './skill-forge/user/components/agenda/agenda.component';
-import {FullCalendarModule} from "@fullcalendar/angular";
 import {EventService} from "./skill-forge/services/event.service";
+import {AgendaComponent} from "./skill-forge/user/components/agenda/agenda.component";
+import {FullCalendarComponent} from "@fullcalendar/angular";
+import {ClassComponent} from "./skill-forge/user/components/class/class.component";
+import {CommonModule} from "@angular/common";
+import {PrimengModule} from "./shared/primeng.module";
+import {ClassService} from "./skill-forge/services/class.service";
 
 @NgModule({
   declarations: [
     AppComponent,
-    ClassesComponent,
     AgendaComponent,
+    ClassComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     CoreModule,
     SharedModule,
-    ReactiveFormsModule,
     FormlyModule.forRoot(),
-    FormlyPrimeNGModule,
-    FullCalendarModule,
+    CommonModule,
+    PrimengModule
   ],
   providers: [
     HttpClient,
-    EventService
+    EventService,
+    ClassService,
   ],
   bootstrap: [AppComponent]
 })
