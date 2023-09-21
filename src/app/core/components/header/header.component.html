@@ -2,7 +2,7 @@
   <div class="flex flex-row ">
     <div class="flex flex-row align-items-center mr-2">
       <img alt="SkillForge" class="flex w-10rem" src="/assets/img/logo.png">
-      <p class="font-italic text-sm">Igniting Success</p>
+      <p class="font-italic text-sm select-none">Igniting Success</p>
     </div>
     <!---------------------------------------------------------------------->
     <div class="flex-1"></div>
@@ -19,7 +19,7 @@
   </div>
   <!---------------------------------------------------------------------->
   <div class="flex flex-row">
-    <div class="card flex justify-content-center">
+    <div class="card flex justify-content-center" *ngIf="isLogged">
       <p-toast></p-toast>
       <p-menu #menu [model]="userLink" [popup]="true"></p-menu>
       <button (click)="menu.toggle($event)" class="btn-nav mr-2">
@@ -27,7 +27,7 @@
       </button>
     </div>
     <ng-container *ngFor="let visitor of visitorLink">
-    <button  class="btn-nav mr-2">
+    <button  class="btn-nav mr-2" *ngIf="!isLogged">
       <span class="white p-1 material-symbols-outlined" title="{{ visitor.name }}" (click)= "visitor.goto ? visitor.goto() : ''" >{{ visitor.icon }}</span>
     </button>
 

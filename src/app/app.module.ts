@@ -10,11 +10,15 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {FormlyPrimeNGModule} from "@ngx-formly/primeng";
 import {HttpClient} from "@angular/common/http";
 import { ClassesComponent } from './skill-forge/user/components/classes/classes.component';
+import { AgendaComponent } from './skill-forge/user/components/agenda/agenda.component';
+import {FullCalendarModule} from "@fullcalendar/angular";
+import {EventService} from "./skill-forge/services/event.service";
 
 @NgModule({
   declarations: [
     AppComponent,
     ClassesComponent,
+    AgendaComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,10 +27,12 @@ import { ClassesComponent } from './skill-forge/user/components/classes/classes.
     SharedModule,
     ReactiveFormsModule,
     FormlyModule.forRoot(),
-    FormlyPrimeNGModule
+    FormlyPrimeNGModule,
+    FullCalendarModule,
   ],
   providers: [
-    HttpClient
+    HttpClient,
+    EventService
   ],
   bootstrap: [AppComponent]
 })

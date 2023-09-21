@@ -18,14 +18,13 @@ import {MessageModule} from "primeng/message";
   declarations: [],
   imports: [
     CommonModule,
-  ], exports :[
+    MenuModule,
     ToastModule,
     ContextMenuModule,
     ButtonModule,
     DropdownModule,
     CardModule,
     BrowserAnimationsModule,
-    MenuModule,
     MessageModule,
   ],
   providers: [

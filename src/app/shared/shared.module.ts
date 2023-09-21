@@ -7,11 +7,13 @@ import {FormlyModule} from "@ngx-formly/core";
 import {CustomFieldType} from "./model/custom-field.type";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {WorkInProgressComponent} from "./components/work-in-progress/work-in-progress.component";
 
 
 @NgModule({
   declarations: [
-    CustomFieldType
+    CustomFieldType,
+    WorkInProgressComponent
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,7 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
     ReactiveFormsModule,
     FormlyModule,
     HttpClientModule,
+
 
   ], exports : [
     FormlyModule,

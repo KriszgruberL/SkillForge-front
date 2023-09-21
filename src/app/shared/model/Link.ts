@@ -3,4 +3,5 @@ export interface  Link {
   url : string;
   icon? : string;
   goto? : () => void;
+  visible? : boolean;
 }

@@ -1,0 +1,19 @@
+.container {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-areas: "aside calendar";
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 0.9fr;
+}
+.container > div {
+  border: 1px dashed #888;
+}
+
+.aside {
+  grid-area: aside;
+}
+.calendar {
+  grid-area: calendar;
+
+}
