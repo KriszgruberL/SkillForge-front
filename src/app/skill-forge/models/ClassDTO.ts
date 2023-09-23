@@ -1,4 +1,5 @@
 import {SessionDTO} from "./SessionDTO";
+import {SmallInstitutionDTO} from "./InstitutionDTO";
 
 export interface ClassDTO {
   id: number;
@@ -8,7 +9,7 @@ export interface ClassDTO {
   endDate: Date;
   teacher: string;
   sessions: SessionDTO[];
-  institutionID : number;
+  institution : SmallInstitutionDTO;
 }
 
 

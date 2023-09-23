@@ -4,6 +4,14 @@ import {ClassDTO} from "../../../models/ClassDTO";
 import {ClassService} from "../../../services/class.service";
 import {InstitutionService} from "../../../services/institution.service";
 import {InstitutionDTO} from "../../../models/InstitutionDTO";
+import {PaginatorState} from "primeng/paginator";
+
+interface PageEvent {
+  first: number;
+  rows: number;
+  page: number;
+  pageCount: number;
+}
 
 @Component({
   selector: 'app-class',
@@ -12,73 +20,64 @@ import {InstitutionDTO} from "../../../models/InstitutionDTO";
 })
 export class ClassComponent implements OnInit {
 
-  coursesLink!: Link[];
-  // classes!: ClassDTO[];
-  institutions!: InstitutionDTO[];
+  // onlineClasses!: OnlineCourseDTO[];
+  classes!: ClassDTO[];
 
   responsiveOptions: any[] | undefined;
+  first2: any;
+  rows2: any;
 
-  constructor(private _classService: ClassService,
-              private _institutionService : InstitutionService) {
-  }
+  constructor(private _classService: ClassService,) {}
+
 
   ngOnInit(): void {
-    this.coursesLink = [
-      {
-        name: 'Précédent', url: "*", icon: 'arrow_back_ios ',
-        // goto : () => this.coursesService.getNext()
-      },
-      {
-        name: 'Suivant', url: "*", icon: 'arrow_forward_ios ',
-        // goto : () => this.coursesService.getNext()
-      }
-    ]
 
-    // this._classService.getClass().subscribe({
-    //       next : data => {
-    //         this.classes = data;
-    //       }, error : err => console.error('Error fetching data : ', err)
-    //     }
-    // )
-    this._institutionService.getInstitution().subscribe({
+
+    this._classService.getClass().subscribe({
           next : data => {
-            this.institutions = data;
+            this.classes = data;
           }, error : err => console.error('Error fetching data : ', err)
         }
     )
 
-    this.responsiveOptions = [
-      {
-        breakpoint: '1199px',
-        numVisible: 1,
-        numScroll: 1
-      },
-      {
-        breakpoint: '991px',
-        numVisible: 2,
-        numScroll: 1
-      },
-      {
-        breakpoint: '767px',
-        numVisible: 1,
-        numScroll: 1
-      }
-    ];
   }
 
   getPourcent(status: number) {
-    if(status === 100 || status > 75){
-      return 'COMPLETED'
-    } else if (status > 0 && status <= 25){
-      return 'TWENTY_FIVE'
-    }else if (status > 25 && status <= 50){
-      return 'FIFTY'
-    }else if (status > 50 && status <= 75){
-      return 'SEVENTY_FIVE'
-    } else if ( status === 0 || status < 25) {
-      return 'NOT STARTED'
+    if (status === 100 || status > 75) {
+      return '100'
+    } else if (status > 0 && status <= 25) {
+      return '25'
+    } else if (status > 25 && status <= 50) {
+      return '50'
+    } else if (status > 50 && status <= 75) {
+      return '75'
+    } else if (status === 0 || status < 25) {
+      return '0'
     } else {
-      return 'ERROR'
+      return 'error'
     }
+  }
+
+  calculateAvancement(end: Date, start: Date): number {
+    const endDate = new Date(end).getTime()
+    const startDate = new Date(start).getTime()
+    const currentDate = Date.now()
+
+    if (currentDate < startDate) {
+      // Class not started
+      return 0;
+    } else if (currentDate >= endDate) {
+      // Class is finished
+      return 100;
+    } else {
+      // Calculate the percentage
+        const percentage = ((currentDate - startDate) / (endDate - startDate) * 100)
+      return Math.round(percentage * 100) / 100
+    }
+  }
+
+
+  onPageChange2($event: PaginatorState) {
+
   }
 }

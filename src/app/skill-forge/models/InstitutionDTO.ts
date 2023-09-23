@@ -16,3 +16,9 @@ export interface InstitutionDTO {
   address: AddressDTO;
   coursesGiven: ClassDTO[];
 }
+
+export interface SmallInstitutionDTO {
+  id: number;
+  name: string;
+  address: AddressDTO;
+}

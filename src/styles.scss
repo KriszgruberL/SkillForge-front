@@ -11,6 +11,15 @@ $white: #FCFDFD;
 
 body {
   font-family: var(--font-family);
+  //background: rgb(0,109,119);
+  //background: linear-gradient(3deg, rgba(0,109,119,1) 0%, rgba(78,166,159,1) 33%, rgba(224,240,245,1) 100%);
+
+
+  background: #E0F0F5;
+  background: linear-gradient(200deg, #E0F0F5, rgba(78, 166, 159, 0.87));
+  background-position : center;
+  background-size: 100% 100%;
+  background-attachment: fixed;
 }
 
 * {

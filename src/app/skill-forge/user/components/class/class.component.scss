@@ -24,3 +24,8 @@ div {
 .task { grid-area: task; }
 .card { grid-area: card; }
 .next { grid-area: next; }
+
+.border-b{
+  border-bottom : 1px solid $dark-teal;
+}
+

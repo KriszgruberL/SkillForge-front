@@ -14,6 +14,10 @@ import {ClassComponent} from "./skill-forge/user/components/class/class.componen
 import {CommonModule} from "@angular/common";
 import {PrimengModule} from "./shared/primeng.module";
 import {ClassService} from "./skill-forge/services/class.service";
+import {InstitutionService} from "./skill-forge/services/institution.service";
+import {ProgressBarModule} from "primeng/progressbar";
+import {DividerModule} from "primeng/divider";
+import {PaginatorModule} from "primeng/paginator";
 
 @NgModule({
   declarations: [
@@ -28,12 +32,16 @@ import {ClassService} from "./skill-forge/services/class.service";
     SharedModule,
     FormlyModule.forRoot(),
     CommonModule,
-    PrimengModule
+    PrimengModule,
+    ProgressBarModule,
+    DividerModule,
+    PaginatorModule
   ],
   providers: [
     HttpClient,
     EventService,
     ClassService,
+    InstitutionService
   ],
   bootstrap: [AppComponent]
 })

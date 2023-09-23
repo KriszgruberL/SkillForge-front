@@ -2,9 +2,10 @@
   <section class="layout">
     <div class="courses flex ">
       <div class="w-11 ">
-        <ng-container *ngFor="let link of coursesLink">
-          bulles
-        </ng-container>
+        <h2 class="ml-3 p-2"> Cours en ligne</h2>
+<!--        <ng-container *ngFor="let online of onlineCourses">-->
+<!--          bulles-->
+<!--        </ng-container>-->
       </div>
       <div class="flex-1">
         <button class="btn-medium m-2 ">Ajouter</button>
@@ -21,35 +22,34 @@
                                   arrow_forward_ios
                             </span>
           </div>
-
         </div>
       </div>
     </div>
-    <div class="card" *ngFor="let clazz of institutions">
-      <ng-container *ngFor="let class of clazz.coursesGiven">
-        <p-carousel [value]="class" [numVisible]="4" [numScroll]="4" [circular]="true"
-                    [responsiveOptions]="responsiveOptions">
 
-          //TODO find a solution to this
-          <ng-co pTemplate="item">
-            <div class="border-1 surface-border border-round m-2 text-center py-5 px-3">
-              <div class="mb-3">
-                <img src="assets/img/" [alt]="class.name" class="w-6 shadow-2"/>
-              </div>
-              <div>
-                <h4 class="mb-1">{{ class.id }}</h4>
-                <h6 class="mt-0 mb-3">{{ class.teacher }}</h6>
-                <p-tag [value]="class.ueCode"></p-tag>
-                <div class="car-buttons mt-5">
-                  <span class="material-symbols-outlined" style="font-size : 2rem; color : darkcyan;">location_on</span>
-                  <span>{{ class.institutionID }}</span>
-                  <p-button type="button" styleClass="p-button p-button-rounded mr-2" icon="pi pi-search"></p-button>
-                </div>
-              </div>
+    <div class="card bg-white border-round-lg">
+      <h2 class="ml-3 p-2"> Cours </h2>
+      <div class="card flex flex-row justify-content-center p-2">
+        <ng-container *ngFor="let class of classes">
+          <p-card class=" w-4  border-round-lg m-1 mb-0 " header="{{ class.name | uppercase }} " subheader="{{ class.teacher | titlecase }}">
+            <div class="flex flex-column align-items-end">
+              <span> {{ class.institution.name |titlecase}} </span>
+              <span class="text-sm font-italic mb-1 flex justify-content-end pb-1">  {{ class.institution.address.street |titlecase }} {{ class.institution.address.number }}</span>
             </div>
-          </ng-co>
-        </p-carousel>
-      </ng-container>
+            <ng-template pTemplate="header">
+              <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png"/>
+            </ng-template>
+            <p-progressBar unit="%" [value]="calculateAvancement( class.endDate, class.startDate )"></p-progressBar>
+            <div class="flex justify-content-end p-2 mt-1">
+              <button class="btn-dark" >Plus de détail  </button>
+            </div>
+          </p-card>
+        </ng-container>
+      </div>
+      <div class="flex align-items-center justify-content-between ">
+        <button class="btn-medium ml-3">Ajouter un cours</button>
+        <p-paginator [first]="first2" [rows]="rows2" [totalRecords]="120" (onPageChange)="onPageChange2($event)" [showCurrentPageReport]="true"
+                     currentPageReportTemplate="{first} - {last} of {totalRecords}" [showPageLinks]="false" [showFirstLastIcon]="false" ></p-paginator>
+      </div>
 
     </div>
     <div class="task">task</div>
