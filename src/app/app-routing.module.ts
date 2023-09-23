@@ -4,11 +4,13 @@ import {HomeComponent} from "./core/components/home/home.component";
 import {WorkInProgressComponent} from "./shared/components/work-in-progress/work-in-progress.component";
 import {AgendaComponent} from "./skill-forge/user/components/agenda/agenda.component";
 import {ClassComponent} from "./skill-forge/user/components/class/class.component";
+import {DetailClassComponent} from "./skill-forge/user/components/class/detail-class/detail-class.component";
 
 
 const routes: Routes = [
   { path : 'home', component : HomeComponent },
   { path : 'class', component : ClassComponent },
+  { path : 'class/:id', component : DetailClassComponent },
   { path : 'agenda', component : AgendaComponent },
   { path : '*', component : WorkInProgressComponent },
   { path : '', component : HomeComponent },

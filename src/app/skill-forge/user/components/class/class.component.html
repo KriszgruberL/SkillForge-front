@@ -29,18 +29,18 @@
     <div class="card bg-white border-round-lg">
       <h2 class="ml-3 p-2"> Cours </h2>
       <div class="card flex flex-row justify-content-center p-2">
-        <ng-container *ngFor="let class of classes">
-          <p-card class=" w-4  border-round-lg m-1 mb-0 " header="{{ class.name | uppercase }} " subheader="{{ class.teacher | titlecase }}">
+        <ng-container *ngFor="let clazz of classes">
+          <p-card class=" w-4  border-round-lg m-1 mb-0 " header="{{ clazz.name | uppercase }} " subheader="{{ clazz.teacher | titlecase }}">
             <div class="flex flex-column align-items-end">
-              <span> {{ class.institution.name |titlecase}} </span>
-              <span class="text-sm font-italic mb-1 flex justify-content-end pb-1">  {{ class.institution.address.street |titlecase }} {{ class.institution.address.number }}</span>
+              <span> {{ clazz.institution.name |titlecase}} </span>
+              <span class="text-sm font-italic mb-1 flex justify-content-end pb-1">  {{ clazz.institution.address.street |titlecase }} {{ clazz.institution.address.number }}</span>
             </div>
             <ng-template pTemplate="header">
               <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png"/>
             </ng-template>
-            <p-progressBar unit="%" [value]="calculateAvancement( class.endDate, class.startDate )"></p-progressBar>
-            <div class="flex justify-content-end p-2 mt-1">
-              <button class="btn-dark" >Plus de détail  </button>
+            <p-progressBar unit="%" [value]="calculateAdvancement( clazz.endDate, clazz.startDate )"></p-progressBar>
+            <div class="flex justify-content-center p-2 mt-1 font-italic dark-teal">
+              <a (click)="showDetail(clazz.id, clazz.name)">Détail du cours</a>
             </div>
           </p-card>
         </ng-container>

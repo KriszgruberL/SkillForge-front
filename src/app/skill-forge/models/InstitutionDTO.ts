@@ -1,4 +1,4 @@
-import {ClassDTO} from "./ClassDTO";
+import {SmallClassDTO} from "./ClassDTO";
 
 export interface AddressDTO {
   id: number;
@@ -14,7 +14,7 @@ export interface InstitutionDTO {
   id: number;
   name: string;
   address: AddressDTO;
-  coursesGiven: ClassDTO[];
+  coursesGiven: SmallClassDTO[];
 }
 
 export interface SmallInstitutionDTO {

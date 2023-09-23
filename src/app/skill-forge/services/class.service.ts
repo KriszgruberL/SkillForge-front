@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ClassDTO} from "../models/ClassDTO";
+import {ClassDTO, SmallClassDTO} from "../models/ClassDTO";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 
@@ -12,7 +12,11 @@ export class ClassService {
 
   constructor(private _http : HttpClient,) { }
 
-  getClass(): Observable<ClassDTO[]>{
-    return this._http.get<ClassDTO[]>(`${this._urlAPI}`)
+  getClass(): Observable<SmallClassDTO[]>{
+    return this._http.get<SmallClassDTO[]>(`${this._urlAPI}`)
+  }
+
+  getOne(id: number) : Observable<ClassDTO> {
+    return this._http.get<ClassDTO>(`${this._urlAPI}/${id}`)
   }
 }

@@ -9,7 +9,6 @@ import {FormlyModule} from "@ngx-formly/core";
 import {HttpClient} from "@angular/common/http";
 import {EventService} from "./skill-forge/services/event.service";
 import {AgendaComponent} from "./skill-forge/user/components/agenda/agenda.component";
-import {FullCalendarComponent} from "@fullcalendar/angular";
 import {ClassComponent} from "./skill-forge/user/components/class/class.component";
 import {CommonModule} from "@angular/common";
 import {PrimengModule} from "./shared/primeng.module";
@@ -18,12 +17,16 @@ import {InstitutionService} from "./skill-forge/services/institution.service";
 import {ProgressBarModule} from "primeng/progressbar";
 import {DividerModule} from "primeng/divider";
 import {PaginatorModule} from "primeng/paginator";
+import {DetailClassComponent} from "./skill-forge/user/components/class/detail-class/detail-class.component";
+import {DialogService} from "primeng/dynamicdialog";
+import {ScrollPanelModule} from "primeng/scrollpanel";
 
 @NgModule({
   declarations: [
     AppComponent,
     AgendaComponent,
-    ClassComponent
+    ClassComponent,
+    DetailClassComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,13 +38,15 @@ import {PaginatorModule} from "primeng/paginator";
     PrimengModule,
     ProgressBarModule,
     DividerModule,
-    PaginatorModule
+    PaginatorModule,
+    ScrollPanelModule
   ],
   providers: [
     HttpClient,
     EventService,
     ClassService,
-    InstitutionService
+    InstitutionService,
+    DialogService
   ],
   bootstrap: [AppComponent]
 })

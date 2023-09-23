@@ -1,10 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {Link} from "../../../../shared/model/Link";
-import {ClassDTO} from "../../../models/ClassDTO";
+import {ClassDTO, SmallClassDTO} from "../../../models/ClassDTO";
 import {ClassService} from "../../../services/class.service";
 import {InstitutionService} from "../../../services/institution.service";
 import {InstitutionDTO} from "../../../models/InstitutionDTO";
 import {PaginatorState} from "primeng/paginator";
+import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
+import {DetailClassComponent} from "./detail-class/detail-class.component";
 
 interface PageEvent {
   first: number;
@@ -21,23 +23,27 @@ interface PageEvent {
 export class ClassComponent implements OnInit {
 
   // onlineClasses!: OnlineCourseDTO[];
-  classes!: ClassDTO[];
+  classes!: SmallClassDTO[];
+  ref: DynamicDialogRef | undefined;
+  class! : ClassDTO;
 
   responsiveOptions: any[] | undefined;
   first2: any;
   rows2: any;
 
-  constructor(private _classService: ClassService,) {}
+  constructor(private _classService: ClassService,
+              public dialogService: DialogService,) {
+  }
 
 
   ngOnInit(): void {
 
 
     this._classService.getClass().subscribe({
-          next : data => {
-            this.classes = data;
-          }, error : err => console.error('Error fetching data : ', err)
-        }
+        next: data => {
+          this.classes = data;
+        }, error: err => console.error('Error fetching data : ', err)
+      }
     )
 
   }
@@ -58,7 +64,7 @@ export class ClassComponent implements OnInit {
     }
   }
 
-  calculateAvancement(end: Date, start: Date): number {
+  calculateAdvancement(end: Date, start: Date): number {
     const endDate = new Date(end).getTime()
     const startDate = new Date(start).getTime()
     const currentDate = Date.now()
@@ -71,13 +77,29 @@ export class ClassComponent implements OnInit {
       return 100;
     } else {
       // Calculate the percentage
-        const percentage = ((currentDate - startDate) / (endDate - startDate) * 100)
+      const percentage = ((currentDate - startDate) / (endDate - startDate) * 100)
       return Math.round(percentage * 100) / 100
     }
   }
 
 
   onPageChange2($event: PaginatorState) {
+
+  }
+
+  showDetail(id: number, name: string) {
+    this._classService.getOne(id).subscribe({
+      next: (data) => {
+        this.ref = this.dialogService.open(DetailClassComponent, {
+          data: {clazz : data},
+          header: name.toUpperCase(),
+          width: '80%',
+          closeOnEscape: true,
+        });
+      },
+      error: error => console.error('Error fetching data with id', id, 'error : ', error)
+    })
+
 
   }
 }
