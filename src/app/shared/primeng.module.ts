@@ -13,6 +13,10 @@ import {MessageModule} from "primeng/message";
 import {FormlyPrimeNGModule} from "@ngx-formly/primeng";
 import {CarouselModule} from "primeng/carousel";
 import {TagModule} from "primeng/tag";
+import {ProgressBarModule} from "primeng/progressbar";
+import {DividerModule} from "primeng/divider";
+import {PaginatorModule} from "primeng/paginator";
+import {ScrollPanelModule} from "primeng/scrollpanel";
 
 
 @NgModule({
@@ -27,6 +31,10 @@ import {TagModule} from "primeng/tag";
     FormlyPrimeNGModule,
     CarouselModule,
     TagModule,
+    ProgressBarModule,
+    DividerModule,
+    PaginatorModule,
+    ScrollPanelModule
 
   ]
   , providers : [

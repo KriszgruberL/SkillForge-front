@@ -1,0 +1,14 @@
+<div class="w-12 flex justify-content-center mt-3">
+  <div class="card w-6 flex justify-content-center bg-white border-round-lg p-2 mb-4">
+    <form class="m-1 w-10 flex flex-column " [formGroup]="form" (ngSubmit)="onSubmit()">
+      <formly-form class="flex justify-content-center w-12" [model]="model" [fields]="fields"
+                   [form]="form" [options]="options"></formly-form>
+      <p-message *ngIf="errorMessage" severity="error" text="{{errorMessage}}"></p-message>
+      <div class="flex flex-row justify-content-evenly mt-3 mb-3">
+        <button class="btn-dark" type="reset">Reset</button>
+        <button class="btn-medium" type="submit">Ajouter le cours</button>
+      </div>
+    </form>
+  </div>
+</div>
+

@@ -5,15 +5,17 @@ import {WorkInProgressComponent} from "./shared/components/work-in-progress/work
 import {AgendaComponent} from "./skill-forge/user/components/agenda/agenda.component";
 import {ClassComponent} from "./skill-forge/user/components/class/class.component";
 import {DetailClassComponent} from "./skill-forge/user/components/class/detail-class/detail-class.component";
+import {AddClassComponent} from "./skill-forge/user/components/class/add-class/add-class.component";
 
 
 const routes: Routes = [
   { path : 'home', component : HomeComponent },
   { path : 'class', component : ClassComponent },
+  { path : 'class/add', component : AddClassComponent },
   { path : 'class/:id', component : DetailClassComponent },
   { path : 'agenda', component : AgendaComponent },
-  { path : '*', component : WorkInProgressComponent },
-  { path : '', component : HomeComponent },
+  { path : '', component : HomeComponent , pathMatch : 'full'},
+  { path : '**', component : WorkInProgressComponent },
 
 ];
 

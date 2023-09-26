@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {ClassDTO, SmallClassDTO} from "../models/ClassDTO";
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import {ClassDTO, ListSmallDTO, Result, SmallClassDTO} from "../models/ClassDTO";
+import {map, Observable, of, tap} from "rxjs";
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +12,14 @@ export class ClassService {
 
   constructor(private _http : HttpClient,) { }
 
+  getClassByUser(page : number = 0, size : number = 3): Observable<ListSmallDTO>{
+    const params = new HttpParams()
+      .set('page', page.toString())
+      .set('size', size.toString())
+
+    return this._http.get<ListSmallDTO>(`${this._urlAPI}/byUser`, { params })
+  }
+
   getClass(): Observable<SmallClassDTO[]>{
     return this._http.get<SmallClassDTO[]>(`${this._urlAPI}`)
   }
@@ -19,4 +27,22 @@ export class ClassService {
   getOne(id: number) : Observable<ClassDTO> {
     return this._http.get<ClassDTO>(`${this._urlAPI}/${id}`)
   }
+
+  getStatusOptions() : Observable<{ label: string; value: string }[]> {
+    return of([
+      { label: 'Pas commencé', value: 'NOT_STARTED' },
+      { label: 'En cours', value: 'IN_PROGRESS' },
+      { label: 'Terminé', value: 'FINISHED' },
+    ]);
+  }
+
+  getResultOptions(): Observable<{label: string; value: string}[]>{
+    return of([
+      { label: 'Réussi', value: 'PASSED' },
+      { label: 'Repêchage', value: 'SECOND_CHANCE' },
+      { label: 'Raté', value: 'FAILED' },]
+    )
+  }
+
+
 }

@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {Link} from "../../../../shared/model/Link";
-import {ClassDTO, SmallClassDTO} from "../../../models/ClassDTO";
+import {ClassDTO, ListSmallDTO, SmallClassDTO} from "../../../models/ClassDTO";
 import {ClassService} from "../../../services/class.service";
-import {InstitutionService} from "../../../services/institution.service";
-import {InstitutionDTO} from "../../../models/InstitutionDTO";
 import {PaginatorState} from "primeng/paginator";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {DetailClassComponent} from "./detail-class/detail-class.component";
+import {AddClassComponent} from "./add-class/add-class.component";
+import {AuthService} from "../../../../shared/services/auth.service";
 
 interface PageEvent {
   first: number;
@@ -23,29 +22,34 @@ interface PageEvent {
 export class ClassComponent implements OnInit {
 
   // onlineClasses!: OnlineCourseDTO[];
-  classes!: SmallClassDTO[];
+  classes!: ListSmallDTO;
   ref: DynamicDialogRef | undefined;
-  class! : ClassDTO;
+  class!: ClassDTO;
 
   responsiveOptions: any[] | undefined;
-  first2: any;
-  rows2: any;
+  currentPage = 0;
+  pageSize = 3;
 
   constructor(private _classService: ClassService,
-              public dialogService: DialogService,) {
+              public dialogService: DialogService) {
   }
 
-
   ngOnInit(): void {
+    this.fetchData();
+  }
 
-
-    this._classService.getClass().subscribe({
+  fetchData() {
+    this._classService.getClassByUser(this.currentPage, this.pageSize).subscribe({
         next: data => {
           this.classes = data;
         }, error: err => console.error('Error fetching data : ', err)
       }
     )
+  }
 
+  onPageChange($event: any) {
+    this.currentPage = $event.first;
+    this.fetchData()
   }
 
   getPourcent(status: number) {
@@ -64,6 +68,20 @@ export class ClassComponent implements OnInit {
     }
   }
 
+  getStatus(status: string) {
+    switch (status) {
+      case 'NOT_STARTED' :
+        return 'Pas commencé'
+      case 'IN_PROGRESS' :
+        return 'En cours'
+      case 'FINISHED' :
+        return 'Terminé'
+      default :
+        return 'ERROR'
+    }
+  }
+
+
   calculateAdvancement(end: Date, start: Date): number {
     const endDate = new Date(end).getTime()
     const startDate = new Date(start).getTime()
@@ -78,20 +96,16 @@ export class ClassComponent implements OnInit {
     } else {
       // Calculate the percentage
       const percentage = ((currentDate - startDate) / (endDate - startDate) * 100)
-      return Math.round(percentage * 100) / 100
+      return Math.round(percentage)
     }
   }
 
-
-  onPageChange2($event: PaginatorState) {
-
-  }
 
   showDetail(id: number, name: string) {
     this._classService.getOne(id).subscribe({
       next: (data) => {
         this.ref = this.dialogService.open(DetailClassComponent, {
-          data: {clazz : data},
+          data: {clazz: data},
           header: name.toUpperCase(),
           width: '80%',
           closeOnEscape: true,
@@ -100,6 +114,13 @@ export class ClassComponent implements OnInit {
       error: error => console.error('Error fetching data with id', id, 'error : ', error)
     })
 
-
   }
+
+  // showAdd() {
+  //       this.ref = this.dialogService.open(AddClassComponent, {
+  //         header : 'Ajouter un cours',
+  //         width: '90%',
+  //         closeOnEscape: true,
+  //       });
+  //     }
 }

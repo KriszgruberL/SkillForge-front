@@ -9,32 +9,34 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import {WorkInProgressComponent} from "./components/work-in-progress/work-in-progress.component";
 import {FullCalendarModule} from "@fullcalendar/angular";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {FormlyDatepickerModule} from "@ngx-formly/primeng/datepicker";
 
 
 @NgModule({
-    declarations: [
-        CustomFieldType,
-        WorkInProgressComponent
-    ],
-    imports: [
-        CommonModule,
-        PrimengModule,
-        FormsModule,
-        ReactiveFormsModule,
-        FormlyModule,
-        HttpClientModule,
-        FullCalendarModule,
-        BrowserAnimationsModule,
+  declarations: [
+    CustomFieldType,
+    WorkInProgressComponent
+  ],
+  imports: [
+    CommonModule,
+    PrimengModule,
+    FormsModule,
+    ReactiveFormsModule,
+    FormlyModule,
+    HttpClientModule,
+    FullCalendarModule,
+    BrowserAnimationsModule,
+    FormlyDatepickerModule,
 
-    ], exports: [
-        CommonModule,
-        FormlyModule,
-        PrimengModule,
-        ReactiveFormsModule,
-        FullCalendarModule,
-    ], bootstrap : [
-        AppComponent
-    ]
+  ], exports: [
+    CommonModule,
+    FormlyModule,
+    PrimengModule,
+    ReactiveFormsModule,
+    FullCalendarModule,
+  ], bootstrap: [
+    AppComponent
+  ]
 })
 export class SharedModule {
 }

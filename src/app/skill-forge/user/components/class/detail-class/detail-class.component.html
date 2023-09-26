@@ -1,8 +1,9 @@
 <div class="card w-12 flex justify-content-center">
   <div class="flex flex-column">
     <ul >
-      <li>Code UE : {{ clazz.ueCode }}</li>
-      <li>Professeur : {{ clazz.teacher }}</li>
+      <li class="bg-primary p-2 m-2 w-12 border-round-lg text-center" *ngIf="clazz.result">{{ getResult(clazz.result) | uppercase}}</li>
+      <li><b>Code UE :</b> {{ clazz.ueCode }}</li>
+      <li><b>Professeur :</b> {{ clazz.teacher }}</li>
       <li>Du {{ clazz.startDate | date }} au {{ clazz.endDate | date }}</li>
       <p-divider></p-divider>
       <p-scrollPanel [style]="{ width: '100%', height: '10rem', 'border-radius' : '1rem', background : '#E0F0F5', padding : '1rem', 'margin-bottom' : '1rem'}" >

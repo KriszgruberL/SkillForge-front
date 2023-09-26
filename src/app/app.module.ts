@@ -6,7 +6,7 @@ import {AppComponent} from './app.component';
 import {SharedModule} from "./shared/shared.module";
 import {CoreModule} from "./core/core.module";
 import {FormlyModule} from "@ngx-formly/core";
-import {HttpClient} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient} from "@angular/common/http";
 import {EventService} from "./skill-forge/services/event.service";
 import {AgendaComponent} from "./skill-forge/user/components/agenda/agenda.component";
 import {ClassComponent} from "./skill-forge/user/components/class/class.component";
@@ -18,8 +18,10 @@ import {ProgressBarModule} from "primeng/progressbar";
 import {DividerModule} from "primeng/divider";
 import {PaginatorModule} from "primeng/paginator";
 import {DetailClassComponent} from "./skill-forge/user/components/class/detail-class/detail-class.component";
-import {DialogService} from "primeng/dynamicdialog";
+import {DialogService, DynamicDialogConfig} from "primeng/dynamicdialog";
 import {ScrollPanelModule} from "primeng/scrollpanel";
+import { AddClassComponent } from './skill-forge/user/components/class/add-class/add-class.component';
+import {AuthInterceptor} from "./shared/interceptors/AuthInterceptor";
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import {ScrollPanelModule} from "primeng/scrollpanel";
     AgendaComponent,
     ClassComponent,
     DetailClassComponent,
+    AddClassComponent,
   ],
   imports: [
     BrowserModule,
@@ -36,17 +39,15 @@ import {ScrollPanelModule} from "primeng/scrollpanel";
     FormlyModule.forRoot(),
     CommonModule,
     PrimengModule,
-    ProgressBarModule,
-    DividerModule,
-    PaginatorModule,
-    ScrollPanelModule
   ],
   providers: [
     HttpClient,
     EventService,
     ClassService,
     InstitutionService,
-    DialogService
+    DialogService,
+    DynamicDialogConfig,
+    { provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true }
   ],
   bootstrap: [AppComponent]
 })

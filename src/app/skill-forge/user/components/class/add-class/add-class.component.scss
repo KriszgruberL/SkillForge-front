@@ -1,0 +1,21 @@
+:host ::ng-deep .p-inputtext, .p-calendar,  {
+  width : 100% !important;
+}
+
+:host ::ng-deep .p-dropdown  {
+  width : 100% !important;
+}
+:host ::ng-deep formly-wrapper-primeng-form-field  {
+  width : 100% !important;
+}
+
+:host ::ng-deep .p-inputtextarea {
+  height : 6rem !important;
+}
+
+:host ::ng-deep formly-field {
+  display: flex;
+  justify-content: center;
+}
+
+

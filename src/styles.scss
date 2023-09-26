@@ -8,6 +8,7 @@ $dark-teal: #006D77;
 $medium-teal: #6dd4dc;
 $azure: #E0F0F5;
 $white: #FCFDFD;
+$header-bar : #4EA69F;
 
 body {
   font-family: var(--font-family);
@@ -115,19 +116,20 @@ img {
 
   &-medium {
     @extend .btn;
-    background: $teal;
+    background: $header-bar;
     border: 1px solid $dark-teal;
+    color : $white;
 
     &:hover {
       background: $dark-teal;
-      color : $white;
+
     }
   }
 
   &-dark{
     @extend .btn;
     background: $dark-teal;
-    border: 1px solid $teal;
+    border: 1px solid $header-bar;
     color : $white;
 
     &:hover {
@@ -136,6 +138,69 @@ img {
     }
   }
 }
+
+.between {
+  display: flex;
+  width: 95%;
+  margin: 0.5rem 0.5rem;
+  justify-content: space-around;
+}
+
+.right {
+  display : flex;
+  justify-content : flex-start;
+}
+
+.prof {
+  width : 99%;
+  margin-left : 0.5rem;
+  margin-bottom : 1rem;
+}
+
+.flex- {
+  display : flex;
+  width: 100%;
+  margin: 0.7rem 0.7rem 1.5rem;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:first-child {
+    margin-left : 0;
+  }
+
+  .flex-1 {
+    flex: 1;
+  }
+
+  .flex-2 {
+    flex: 2;
+  }
+
+  .flex-3 {
+    flex: 3;
+  }
+
+  .flex-4 {
+    flex: 4;
+  }
+  .flex-5 {
+    flex: 5;
+  }
+  .flex-6 {
+    flex: 6;
+  }
+
+[class*=flex-]{
+  margin-left : 0.5rem;
+}
+
+
+}
+
+
+
 
 
 

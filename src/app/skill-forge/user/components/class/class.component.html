@@ -3,9 +3,9 @@
     <div class="courses flex ">
       <div class="w-11 ">
         <h2 class="ml-3 p-2"> Cours en ligne</h2>
-<!--        <ng-container *ngFor="let online of onlineCourses">-->
-<!--          bulles-->
-<!--        </ng-container>-->
+        <!--        <ng-container *ngFor="let online of onlineCourses">-->
+        <!--          bulles-->
+        <!--        </ng-container>-->
       </div>
       <div class="flex-1">
         <button class="btn-medium m-2 ">Ajouter</button>
@@ -26,19 +26,34 @@
       </div>
     </div>
 
-    <div class="card bg-white border-round-lg">
+    <div *ngIf="classes"  class="card bg-white border-round-lg">
       <h2 class="ml-3 p-2"> Cours </h2>
-      <div class="card flex flex-row justify-content-center p-2">
-        <ng-container *ngFor="let clazz of classes">
-          <p-card class=" w-4  border-round-lg m-1 mb-0 " header="{{ clazz.name | uppercase }} " subheader="{{ clazz.teacher | titlecase }}">
-            <div class="flex flex-column align-items-end">
-              <span> {{ clazz.institution.name |titlecase}} </span>
-              <span class="text-sm font-italic mb-1 flex justify-content-end pb-1">  {{ clazz.institution.address.street |titlecase }} {{ clazz.institution.address.number }}</span>
-            </div>
+      <div class="card flex flex-row justify-content-center p-2" >
+        <ng-container *ngFor="let clazz of classes.listCourse">
+          <p-card class=" w-4 border-round-lg p-2" header="{{ clazz.name | uppercase }} "
+                  subheader="{{ clazz.teacher | titlecase }}">
             <ng-template pTemplate="header">
-              <img alt="Card" src="https://primefaces.org/cdn/primeng/images/usercard.png"/>
+              <div class="p-1 h-2rem bg-primary text-center">{{getStatus(clazz.status) | uppercase}}</div>
             </ng-template>
-            <p-progressBar unit="%" [value]="calculateAdvancement( clazz.endDate, clazz.startDate )"></p-progressBar>
+            <div class="mb-1">
+              <p-progressBar [showValue]="false"
+                             [value]="calculateAdvancement(clazz.endDate, clazz.startDate)"></p-progressBar>
+              <div class="progress-label relative ">
+                {{ calculateAdvancement(clazz.endDate, clazz.startDate) }}%
+              </div>
+            </div>
+
+            <div class="flex justify-content-between align-items-center mt-2 ">
+              <div><span class="material-symbols-outlined mr-2" style="font-size : 2rem; color : darkcyan;">
+                  pin_drop
+                </span></div>
+              <div class="flex flex-column align-items-end">
+                <span class="font-bold"> {{ clazz.institution.name |titlecase}} </span>
+                <span
+                  class="text-sm font-italic mb-1 flex justify-content-end pb-1">{{ clazz.institution.address.street |titlecase }} {{ clazz.institution.address.number }} {{ clazz.institution.address.zipcode }}</span>
+              </div>
+            </div>
+
             <div class="flex justify-content-center p-2 mt-1 font-italic dark-teal">
               <a (click)="showDetail(clazz.id, clazz.name)">Détail du cours</a>
             </div>
@@ -46,9 +61,11 @@
         </ng-container>
       </div>
       <div class="flex align-items-center justify-content-between ">
-        <button class="btn-medium ml-3">Ajouter un cours</button>
-        <p-paginator [first]="first2" [rows]="rows2" [totalRecords]="120" (onPageChange)="onPageChange2($event)" [showCurrentPageReport]="true"
-                     currentPageReportTemplate="{first} - {last} of {totalRecords}" [showPageLinks]="false" [showFirstLastIcon]="false" ></p-paginator>
+        <button class="btn-medium ml-3" ><a routerLink="/class/add">Ajouter un cours</a></button>
+        <p-paginator [first]="currentPage" [rows]="pageSize" [totalRecords]="classes.count / pageSize" (onPageChange)="onPageChange($event)"
+                     [showCurrentPageReport]="true"
+                     currentPageReportTemplate="{first} sur {totalRecords}" [showPageLinks]="false"
+                     [showFirstLastIcon]="false"></p-paginator>
       </div>
 
     </div>

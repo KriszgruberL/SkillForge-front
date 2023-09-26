@@ -15,4 +15,13 @@ export class DetailClassComponent {
     this.clazz = this.config.data.clazz
   }
 
+  getResult(result : string){
+    switch (result){
+      case 'SECOND_CHANCE' : return 'Repêchage'
+      case 'PASSED' : return 'Réussi'
+      case 'FAILED' :return "Raté"
+      default : return 'ERROR'
+    }
+  }
+
 }

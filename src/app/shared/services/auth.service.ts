@@ -57,6 +57,10 @@ export class AuthService {
     this._$isLogged.next(value);
   }
 
+  get token(){
+    return this.connectedUser?.token;
+  }
+
   register(form : RegisterModel){
     return this._http.post<AuthDTO>(`${this._urlAPI}/register`, form ).pipe(
       tap((response : AuthDTO) => this.connectedUser = response),
