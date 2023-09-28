@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {AuthDTO} from "../model/User";
 import {BehaviorSubject, Observable, tap} from "rxjs";
-import {Form, FormGroup} from "@angular/forms";
 import {LoginModel, RegisterModel} from "../model/Auth";
 
 @Injectable({
@@ -70,6 +69,7 @@ export class AuthService {
   logout(): void {
     this.connectedUser = undefined
     localStorage.removeItem('AUTH_KEY')
-    // this.$isLogged = false;
+    this._router.navigateByUrl("/home")
+    // window.location.reload();
   }
 }

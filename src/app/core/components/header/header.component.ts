@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subscription$$: Subscription;
 
   constructor(public dialogService: DialogService,
-              private messageService: MessageService,
+              private _msgService: MessageService,
               private _authService : AuthService) {
     this.subscription$$ = this._authService.connectedUser$.subscribe((user) => {
       this.isLogged = user !== undefined;
@@ -69,13 +69,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.subscription$$.unsubscribe();
   }
 
-
   update() {
-    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Data Updated'});
+    this._msgService.add({severity: 'success', summary: 'Success', detail: 'Data Updated'});
   }
 
   delete() {
-    this.messageService.add({severity: 'warn', summary: 'Delete', detail: 'Data Deleted'});
+    this._msgService.add({severity: 'warn', summary: 'Delete', detail: 'Data Deleted'});
   }
 
   showRegister() {
@@ -98,6 +97,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
   logout(): void {
     this._authService.logout();
   }
+
+
 
 
 }

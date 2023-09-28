@@ -22,6 +22,7 @@ import {DialogService, DynamicDialogConfig} from "primeng/dynamicdialog";
 import {ScrollPanelModule} from "primeng/scrollpanel";
 import { AddClassComponent } from './skill-forge/user/components/class/add-class/add-class.component';
 import {AuthInterceptor} from "./shared/interceptors/AuthInterceptor";
+import {MessageService} from "primeng/api";
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import {AuthInterceptor} from "./shared/interceptors/AuthInterceptor";
     ClassService,
     InstitutionService,
     DialogService,
+    MessageService,
     DynamicDialogConfig,
     { provide : HTTP_INTERCEPTORS, useClass : AuthInterceptor, multi : true }
   ],

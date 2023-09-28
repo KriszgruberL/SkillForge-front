@@ -196,6 +196,8 @@ export class AddClassComponent implements OnInit{
     //     this.errorMessage = 'Échec de l\'authentification. Vérifiez vos informations.'
     //   }
     // })
+
+    // this._classService.addClass(this.model).
   }
 
 

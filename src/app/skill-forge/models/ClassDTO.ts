@@ -21,14 +21,14 @@ export interface ClassDTO {
   id: number;
   name: string;
   ueCode?: string;
-  result: Result;
+  result?: Result;
   status: Status;
   startDate: Date;
   endDate: Date;
   teacher?: string;
   program?: string;
   terminalCapacities?: string;
-  sessions?: SessionDTO[];
+  sessions: SessionDTO[];
   institution: SmallInstitutionDTO;
 }
 
